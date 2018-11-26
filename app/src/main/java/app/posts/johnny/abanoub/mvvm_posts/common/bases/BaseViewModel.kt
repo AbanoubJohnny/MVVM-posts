@@ -3,6 +3,7 @@ package app.posts.johnny.abanoub.mvvm_posts.common.bases
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.CallSuper
+import android.support.annotation.StringRes
 import android.view.View
 import app.posts.johnny.abanoub.mvvm_posts.modules.posts.PostListViewModel
 import app.posts.johnny.abanoub.mvvm_posts.network.ScheduleProvider
@@ -17,10 +18,14 @@ abstract class BaseViewModel : ViewModel() {
     //implement here base view method injection and methods
 
     private val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
+    private val errorMessage:MutableLiveData<Int> = MutableLiveData()
+    val errorClickListener = View.OnClickListener {
+        //TODO: implement here what you want to do on clicking retry
+    }
     private val disposables: CompositeDisposable
 
     @Inject
-    lateinit var scheduelProvider: ScheduleProvider
+    lateinit var scheduleProvider: ScheduleProvider
 
     private val injector: ViewModelInjector = DaggerViewModelInjector
         .builder()
@@ -49,6 +54,7 @@ abstract class BaseViewModel : ViewModel() {
     @CallSuper
     override fun onCleared() {
         disposables.clear()
+        errorMessage.value = null
         super.onCleared()
     }
 
@@ -58,5 +64,10 @@ abstract class BaseViewModel : ViewModel() {
 
     fun onRetrievePostListStart() {
         loadingVisibility.value = View.VISIBLE
+        errorMessage.value = null
+    }
+
+    fun showError(@StringRes errorMessage: Int){
+        this.errorMessage.value = errorMessage
     }
 }

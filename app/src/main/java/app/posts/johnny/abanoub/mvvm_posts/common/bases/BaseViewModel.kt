@@ -8,8 +8,8 @@ import android.view.View
 import app.posts.johnny.abanoub.mvvm_posts.modules.posts.PostListViewModel
 import app.posts.johnny.abanoub.mvvm_posts.network.ScheduleProvider
 import app.posts.johnny.abanoub.mvvm_posts.network.injection.DaggerViewModelInjector
-import app.posts.johnny.abanoub.mvvm_posts.network.injection.module.NetworkModule
 import app.posts.johnny.abanoub.mvvm_posts.network.injection.ViewModelInjector
+import app.posts.johnny.abanoub.mvvm_posts.network.injection.module.NetworkModule
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -18,7 +18,7 @@ abstract class BaseViewModel : ViewModel() {
     //implement here base view method injection and methods
 
     private val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
-    private val errorMessage:MutableLiveData<Int> = MutableLiveData()
+    private val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener {
         //TODO: implement here what you want to do on clicking retry
     }
@@ -67,7 +67,7 @@ abstract class BaseViewModel : ViewModel() {
         errorMessage.value = null
     }
 
-    fun showError(@StringRes errorMessage: Int){
+    fun showError(@StringRes errorMessage: Int) {
         this.errorMessage.value = errorMessage
     }
 }

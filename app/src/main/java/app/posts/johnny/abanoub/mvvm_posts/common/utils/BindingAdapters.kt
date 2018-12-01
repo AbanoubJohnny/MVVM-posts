@@ -5,12 +5,21 @@ import android.arch.lifecycle.Observer
 import android.databinding.BindingAdapter
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.TextView
 import app.posts.johnny.abanoub.mvvm_posts.common.utils.extension.getParentActivity
 
-@BindingAdapter("mutableVisibility")
+@BindingAdapter("app:mutableVisibility")
 fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
-        val parentActivity: AppCompatActivity? = view.getParentActivity()
-        if(parentActivity != null && visibility != null) {
-            visibility.observe(parentActivity, Observer { value -> view.visibility = value?:View.VISIBLE })
-        }
+    val parentActivity: AppCompatActivity? = view.getParentActivity()
+    if (parentActivity != null && visibility != null) {
+        visibility.observe(parentActivity, Observer { value -> view.visibility = value ?: View.VISIBLE })
+    }
+}
+
+@BindingAdapter("app:mutableText")
+fun setMutableText(view: TextView, text: MutableLiveData<String>) {
+    val parentActivity: AppCompatActivity? = view.getParentActivity()
+    if (parentActivity != null) {
+        text.observe(parentActivity, Observer { value -> view.text = value ?: "" })
+    }
 }

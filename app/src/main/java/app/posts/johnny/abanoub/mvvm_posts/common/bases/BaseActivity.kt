@@ -12,9 +12,9 @@ import app.posts.johnny.abanoub.mvvm_posts.R
 abstract class BaseActivity<VM:BaseViewModel, DB : ViewDataBinding>: AppCompatActivity(){
     private var errorSandbar: Snackbar? = null
 
-    private lateinit var viewModel: VM
+    protected lateinit var viewModel: VM
 
-    private lateinit var binding: DB
+    protected lateinit var binding: DB
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
